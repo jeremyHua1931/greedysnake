@@ -84,7 +84,7 @@ void GameWidget::initSnake()
         map_label[initX + i][initY]->label->show();                                                              // 显示蛇身位置的标签
         snake.append(map_label[initX + i][initY]);                                                               // 将蛇身位置添加到蛇的数组中
     }
-    snake[snake.length() - 1]->label->setStyleSheet("background:green;border-radius:" + QString::number(Label_Size / 2)); // 设置蛇尾部分的样式
+    snake[snake.length() - 1]->label->setStyleSheet("background:green;border-radius:" + QString::number(Label_Size / 2)); // 设置蛇头部分的样式
 }
 
 void GameWidget::moveSnake()
@@ -108,7 +108,7 @@ void GameWidget::moveSnake()
             scores++;                        // 分数加1
             emit displayScoreSignal(scores); // 发送分数信号
             tmp->type = snake_label;         // 设置下一步为蛇身
-            for (int i = 0; i < 3; i++)      // 蛇身增加3节
+            for (int i = 0; i < 1; i++)      // 蛇身增加1节
                 snake.append(tmp);
             createFood(); // 创建新的食物
         }
@@ -138,55 +138,57 @@ void GameWidget::createFood()
     map_label[foodX][foodY]->label->show();                          // 显示食物
 }
 
-void GameWidget::keyPressEvent(QKeyEvent *e)
-{
-    if (canMove)
-    {
-        switch (e->key())
-        {
-        case Qt::Key_Left:
-            if (dX != -1 && dY != 0) // 左移时，确保蛇不会反向移动且不会向上或向下移动
-            {
-                dX = -1; // 设置 X 轴移动方向为负方向
-                dY = 0;  // 禁止 Y 轴移动
+void GameWidget::keyPressEvent(QKeyEvent *e) {
+   if (canMove){
+    switch(e->key()) {
+    case Qt::Key_Left:
+        // 当蛇不是向右移动时才能向左移动
+        if (dX != 1) {
+            dX = -1;
+            dY = 0;
+            if (!pressed) {
+                timer.start(speed);
+                pressed = true;
             }
-            break;
-        case Qt::Key_Right:
-            if (!pressed && dX != 1 && dY != 0) // 右移时，确保蛇不会反向移动且不会向上或向下移动
-            {
-                timer.start(speed); // 启动计时器
-                pressed = true;     // 标记按钮已按下
-            }
-            if (dX != 1 && dY != 0) // 避免蛇反向移动且不会向上或向下移动
-            {
-                dX = 1; // 设置 X 轴移动方向为正方向
-                dY = 0; // 禁止 Y 轴移动
-            }
-            break;
-        case Qt::Key_Up:
-            if (dY != -1 && dX != 0) // 上移时，确保蛇不会反向移动且不会向左或向右移动
-            {
-                dX = 0;  // 禁止 X 轴移动
-                dY = -1; // 设置 Y 轴移动方向为负方向
-                if (!pressed)
-                    timer.start(speed); // 启动计时器
-                pressed = true;         // 标记按钮已按下
-            }
-            break;
-        case Qt::Key_Down:
-            if (dY != 1 && dX != 0) // 下移时，确保蛇不会反向移动且不会向左或向右移动
-            {
-                dX = 0; // 禁止 X 轴移动
-                dY = 1; // 设置 Y 轴移动方向为正方向
-                if (!pressed)
-                    timer.start(speed); // 启动计时器
-                pressed = true;         // 标记按钮已按下
-            }
-            break;
-        default:
-            break;
         }
+        break;
+    case Qt::Key_Right:
+        // 当蛇不是向左移动时才能向右移动
+        if (dX != -1) {
+            dX = 1;
+            dY = 0;
+            if (!pressed) {
+                timer.start(speed);
+                pressed = true;
+            }
+        }
+        break;
+    case Qt::Key_Up:
+        // 当蛇不是向下移动时才能向上移动
+        if (dY != 1) {
+            dX = 0;
+            dY = -1;
+            if (!pressed) {
+                timer.start(speed);
+                pressed = true;
+            }
+        }
+        break;
+    case Qt::Key_Down:
+        // 当蛇不是向上移动时才能向下移动
+        if (dY != -1) {
+            dX = 0;
+            dY = 1;
+            if (!pressed) {
+                timer.start(speed);
+                pressed = true;
+            }
+        }
+        break;
+    default:
+        break;
     }
+   }
 }
 
 void GameWidget::mousePressEvent(QMouseEvent *e)
