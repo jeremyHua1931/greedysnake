@@ -281,7 +281,7 @@ void GameWidget::continueGame(double movespeed)
 
 void GameWidget::gameOver()
 {
-    QMessageBox::information(this, "Oh!No!", "Game is over! Do you want to try again?", QMessageBox::Ok); // 显示游戏结束信息框
+    QMessageBox::information(this, "Oh!No!", "Game is over! Do you want to try again? Please click the restart button!", QMessageBox::Ok); // 显示游戏结束信息框
     for (int x = 0; x < MAX_X; x++)
     {
         for (int y = 0; y < MAX_Y; y++)

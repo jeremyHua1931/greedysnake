@@ -13,14 +13,28 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 
 
-    // 设置按钮的背景颜色
-    ui->start->setStyleSheet("QPushButton { background-color: #4b5cc4; color: black; font-size: 16px; font-weight: bold;}");
-    ui->pause->setStyleSheet("QPushButton { background-color: #da9f6c; color: white; font-size: 16px; font-weight: bold;}");
-    ui->con->setStyleSheet("QPushButton { background-color: #da9f6c; color: white; font-size: 16px; font-weight: bold;}");
-    ui->restart->setStyleSheet("QPushButton { background-color: #00C3FF; color: black; font-size: 16px; font-weight: bold;}");
-    ui->save->setStyleSheet("QPushButton { background-color: #ebb07a; color: white; font-size: 16px; font-weight: bold;}");
-    ui->load->setStyleSheet("QPushButton { background-color: #ebb07a; color: white; font-size: 16px; font-weight: bold;}");
-    ui->quit->setStyleSheet("QPushButton { background-color: #E54046; color: black; font-size: 16px; font-weight: bold;}");
+    // 修改颜色
+    ui->start->setStyleSheet("QPushButton { background-color: #4b5cc4; color: black; font-size: 16px; font-weight: bold;}"
+                         "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
+
+    ui->pause->setStyleSheet("QPushButton { background-color: #da9f6c; color: white; font-size: 16px; font-weight: bold;}"
+                         "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
+
+    ui->con->setStyleSheet("QPushButton { background-color: #da9f6c; color: white; font-size: 16px; font-weight: bold;}"
+                       "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
+
+    ui->restart->setStyleSheet("QPushButton { background-color: #00C3FF; color: black; font-size: 16px; font-weight: bold;}"
+                           "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
+
+    ui->save->setStyleSheet("QPushButton { background-color: #ebb07a; color: white; font-size: 16px; font-weight: bold;}"
+                        "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
+
+    ui->load->setStyleSheet("QPushButton { background-color: #ebb07a; color: white; font-size: 16px; font-weight: bold;}"
+                        "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
+
+    ui->quit->setStyleSheet("QPushButton { background-color: #E54046; color: black; font-size: 16px; font-weight: bold;}"
+                        "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
+
 
     ui->help->setStyleSheet("QPushButton { background-color: #C0D8D8; color: black; font-size: 16px; font-weight: bold;}");
 
@@ -28,6 +42,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->label_2->setStyleSheet("QLabel {  font-size: 16px; font-weight: bold;}");
     ui->label_3->setStyleSheet("QLabel {  font-size: 16px; font-weight: bold;}");
     ui->spLabel->setStyleSheet("QLabel {  color: blue;font-size: 24px; font-weight: bold;}");
+
+    ui->lcd->setStyleSheet("QLCDNumber { color: blue;  }");
+    ui->lcd1->setStyleSheet("QLCDNumber { color: red;  }");
+
 
 
     // 初始化背景音乐播放列表和播放器
