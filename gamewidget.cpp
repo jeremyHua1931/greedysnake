@@ -145,26 +145,26 @@ void GameWidget::keyPressEvent(QKeyEvent *e)
         switch (e->key())
         {
         case Qt::Key_Left:
-            if (dX != -1) // 左移时，确保蛇不会反向移动
+            if (dX != -1 && dY != 0) // 左移时，确保蛇不会反向移动且不会向上或向下移动
             {
                 dX = -1; // 设置 X 轴移动方向为负方向
                 dY = 0;  // 禁止 Y 轴移动
             }
             break;
         case Qt::Key_Right:
-            if (!pressed) // 右移时，确保蛇不会反向移动
+            if (!pressed && dX != 1 && dY != 0) // 右移时，确保蛇不会反向移动且不会向上或向下移动
             {
                 timer.start(speed); // 启动计时器
                 pressed = true;     // 标记按钮已按下
             }
-            if (dX != 1) // 避免蛇反向移动
+            if (dX != 1 && dY != 0) // 避免蛇反向移动且不会向上或向下移动
             {
                 dX = 1; // 设置 X 轴移动方向为正方向
                 dY = 0; // 禁止 Y 轴移动
             }
             break;
         case Qt::Key_Up:
-            if (dY != -1) // 上移时，确保蛇不会反向移动
+            if (dY != -1 && dX != 0) // 上移时，确保蛇不会反向移动且不会向左或向右移动
             {
                 dX = 0;  // 禁止 X 轴移动
                 dY = -1; // 设置 Y 轴移动方向为负方向
@@ -174,7 +174,7 @@ void GameWidget::keyPressEvent(QKeyEvent *e)
             }
             break;
         case Qt::Key_Down:
-            if (dY != 1) // 下移时，确保蛇不会反向移动
+            if (dY != 1 && dX != 0) // 下移时，确保蛇不会反向移动且不会向左或向右移动
             {
                 dX = 0; // 禁止 X 轴移动
                 dY = 1; // 设置 Y 轴移动方向为正方向
