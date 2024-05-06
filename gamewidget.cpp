@@ -142,6 +142,7 @@ void GameWidget::keyPressEvent(QKeyEvent *e) {
    if (canMove){
     switch(e->key()) {
     case Qt::Key_Left:
+    case Qt::Key_A:
         // 当蛇不是向右移动时才能向左移动
         if (dX != 1) {
             dX = -1;
@@ -153,6 +154,7 @@ void GameWidget::keyPressEvent(QKeyEvent *e) {
         }
         break;
     case Qt::Key_Right:
+    case Qt::Key_D:
         // 当蛇不是向左移动时才能向右移动
         if (dX != -1) {
             dX = 1;
@@ -164,6 +166,7 @@ void GameWidget::keyPressEvent(QKeyEvent *e) {
         }
         break;
     case Qt::Key_Up:
+    case Qt::Key_W:
         // 当蛇不是向下移动时才能向上移动
         if (dY != 1) {
             dX = 0;
@@ -175,6 +178,7 @@ void GameWidget::keyPressEvent(QKeyEvent *e) {
         }
         break;
     case Qt::Key_Down:
+    case Qt::Key_S:
         // 当蛇不是向上移动时才能向下移动
         if (dY != -1) {
             dX = 0;

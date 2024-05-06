@@ -133,7 +133,7 @@ private slots:
      */
     void displayScoreSlots(int score);
 
-     /**
+    /**
      * @brief 显示游戏规则
      *
      */   
