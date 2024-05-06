@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1025</width>
-    <height>900</height>
+    <height>843</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -24,7 +24,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>59</y>
+      <y>10</y>
       <width>820</width>
       <height>820</height>
      </rect>
@@ -43,7 +43,7 @@
     <property name="geometry">
      <rect>
       <x>840</x>
-      <y>60</y>
+      <y>20</y>
       <width>171</width>
       <height>441</height>
      </rect>
@@ -171,7 +171,7 @@
     <property name="geometry">
      <rect>
       <x>840</x>
-      <y>640</y>
+      <y>610</y>
       <width>171</width>
       <height>61</height>
      </rect>
@@ -181,7 +181,7 @@
     <property name="geometry">
      <rect>
       <x>900</x>
-      <y>620</y>
+      <y>590</y>
       <width>72</width>
       <height>15</height>
      </rect>
@@ -194,7 +194,7 @@
     <property name="geometry">
      <rect>
       <x>900</x>
-      <y>510</y>
+      <y>480</y>
       <width>72</width>
       <height>15</height>
      </rect>
@@ -207,7 +207,7 @@
     <property name="geometry">
      <rect>
       <x>840</x>
-      <y>530</y>
+      <y>500</y>
       <width>171</width>
       <height>61</height>
      </rect>
@@ -217,7 +217,7 @@
     <property name="geometry">
      <rect>
       <x>840</x>
-      <y>750</y>
+      <y>720</y>
       <width>171</width>
       <height>21</height>
      </rect>
@@ -245,7 +245,7 @@
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>730</y>
+      <y>700</y>
       <width>72</width>
       <height>15</height>
      </rect>
@@ -258,7 +258,7 @@
     <property name="geometry">
      <rect>
       <x>920</x>
-      <y>780</y>
+      <y>750</y>
       <width>54</width>
       <height>12</height>
      </rect>
@@ -267,53 +267,6 @@
      <string>7</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1025</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>Menu</string>
-    </property>
-    <addaction name="_start"/>
-    <addaction name="_pause"/>
-    <addaction name="_continue"/>
-    <addaction name="_restart"/>
-    <addaction name="_save"/>
-    <addaction name="_load"/>
-    <addaction name="_quit"/>
-   </widget>
-   <addaction name="menu"/>
-  </widget>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="_start"/>
-   <addaction name="separator"/>
-   <addaction name="_pause"/>
-   <addaction name="separator"/>
-   <addaction name="_continue"/>
-   <addaction name="separator"/>
-   <addaction name="_restart"/>
-   <addaction name="separator"/>
-   <addaction name="_save"/>
-   <addaction name="separator"/>
-   <addaction name="_load"/>
-   <addaction name="separator"/>
-   <addaction name="_quit"/>
   </widget>
   <action name="_start">
    <property name="text">
