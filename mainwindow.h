@@ -3,9 +3,12 @@
 
 #include <QMainWindow>
 #include "gamewidget.h"
+#include <QMediaPlayer>
+#include <QMediaPlaylist>
 
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -53,6 +56,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QMediaPlayer *backgroundMusicPlayer;
+    QMediaPlaylist *backgroundMusicPlaylist;
 };
 
 #endif // MAINWINDOW_H

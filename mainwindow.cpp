@@ -3,12 +3,22 @@
 #include <QIcon>
 #include <QtMath>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    this->setFixedSize(1025,900);
+    this->setFixedSize(1025, 900);
     this->setWindowTitle("Yqr's Greedy Snake");
     this->setWindowIcon(QIcon(":/icon/icon/57994126.png"));
+
+    // 初始化背景音乐播放列表和播放器
+    backgroundMusicPlaylist = new QMediaPlaylist();
+    backgroundMusicPlaylist->addMedia(QUrl("qrc:/snake_background_music.wav"));
+    backgroundMusicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);
+
+    backgroundMusicPlayer = new QMediaPlayer();
+    backgroundMusicPlayer->setPlaylist(backgroundMusicPlaylist);
+    backgroundMusicPlayer->play();
+
     ui->game->setParent(this);
     ui->pause->setEnabled(false);
     ui->con->setEnabled(false);
@@ -16,21 +26,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     ui->save->setEnabled(false);
     ui->lcd->display(0);
     ui->lcd1->display(0);
-    QObject::connect(ui->game,SIGNAL(gameOverSignal()),this,SLOT(gameOverSlots()));
-    QObject::connect(ui->game,SIGNAL(displayStepSignal(int)),this,SLOT(displayStepSlots(int)));
-    QObject::connect(ui->game,SIGNAL(displayScoreSignal(int)),this,SLOT(displayScoreSlots(int)));
+    QObject::connect(ui->game, SIGNAL(gameOverSignal()), this, SLOT(gameOverSlots()));
+    QObject::connect(ui->game, SIGNAL(displayStepSignal(int)), this, SLOT(displayStepSlots(int)));
+    QObject::connect(ui->game, SIGNAL(displayScoreSignal(int)), this, SLOT(displayScoreSlots(int)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete backgroundMusicPlayer;
+    delete backgroundMusicPlaylist;
 }
 
 void MainWindow::on__start_triggered()
 {
-    int speed= ui->speed->value();
+    int speed = ui->speed->value();
     ui->speed->setEnabled(false);
-    ui->game->startGame(qLn(10.5-speed)*50);
+    ui->game->startGame(qLn(10.5 - speed) * 50);
     ui->start->setEnabled(false);
     ui->restart->setEnabled(false);
     ui->con->setEnabled(false);
@@ -56,8 +68,8 @@ void MainWindow::on__save_triggered()
 
 void MainWindow::on__continue_triggered()
 {
-    int speed= ui->speed->value();
-    ui->game->continueGame(qLn(10.5-speed)*50);
+    int speed = ui->speed->value();
+    ui->game->continueGame(qLn(10.5 - speed) * 50);
 
     ui->con->setEnabled(false);
     ui->pause->setEnabled(true);
@@ -84,7 +96,8 @@ void MainWindow::on__quit_triggered()
     this->close();
 }
 
-void MainWindow::gameOverSlots(){
+void MainWindow::gameOverSlots()
+{
     ui->start->setEnabled(false);
     ui->pause->setEnabled(false);
     ui->con->setEnabled(false);
@@ -96,9 +109,9 @@ void MainWindow::gameOverSlots(){
 
 void MainWindow::on_start_clicked()
 {
-    int speed= ui->speed->value();
+    int speed = ui->speed->value();
     ui->speed->setEnabled(false);
-    ui->game->startGame(qLn(10.5-speed)*50);
+    ui->game->startGame(qLn(10.5 - speed) * 50);
 
     ui->start->setEnabled(false);
     ui->restart->setEnabled(false);
@@ -125,8 +138,8 @@ void MainWindow::on_pause_clicked()
 
 void MainWindow::on_con_clicked()
 {
-    int speed= ui->speed->value();
-    ui->game->continueGame(qLn(10.5-speed)*50);
+    int speed = ui->speed->value();
+    ui->game->continueGame(qLn(10.5 - speed) * 50);
     ui->con->setEnabled(false);
     ui->pause->setEnabled(true);
 }
@@ -144,7 +157,7 @@ void MainWindow::on_restart_clicked()
 
 void MainWindow::on_save_clicked()
 {
-     ui->game->saveGame();
+    ui->game->saveGame();
 }
 
 void MainWindow::on_quit_clicked()
@@ -152,10 +165,12 @@ void MainWindow::on_quit_clicked()
     this->close();
 }
 
-void MainWindow::displayStepSlots(int step){
+void MainWindow::displayStepSlots(int step)
+{
     ui->lcd->display(step);
 }
 
-void MainWindow::displayScoreSlots(int score){
+void MainWindow::displayScoreSlots(int score)
+{
     ui->lcd1->display(score);
 }
