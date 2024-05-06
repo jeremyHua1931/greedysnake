@@ -56,16 +56,16 @@ void GameWidget::initBorder()
         map_label[0][y]->label->setStyleSheet("background-color:#bcaca1;");
         map_label[0][y]->label->show();                                    // 显示边界标签
         map_label[MAX_X - 1][y]->type = border_label;                      // 设置边界标签类型为边界标签
-        map_label[MAX_X - 1][y]->label->setStyleSheet("background-color:#bcaca1;"); // 设置背景颜色为黑色
+        map_label[MAX_X - 1][y]->label->setStyleSheet("background-color:#bcaca1;"); 
         map_label[MAX_X - 1][y]->label->show();                            // 显示边界标签
     }
     for (int x = 0; x < MAX_X; x++)
     {
         map_label[x][0]->type = border_label;                              // 设置边界标签类型为边界标签
-        map_label[x][0]->label->setStyleSheet("background-color:#bcaca1;");         // 设置背景颜色为黑色
+        map_label[x][0]->label->setStyleSheet("background-color:#bcaca1;");         
         map_label[x][0]->label->show();                                    // 显示边界标签
         map_label[x][MAX_Y - 1]->type = border_label;                      // 设置边界标签类型为边界标签
-        map_label[x][MAX_Y - 1]->label->setStyleSheet("background-color:#bcaca1;"); // 设置背景颜色为黑色
+        map_label[x][MAX_Y - 1]->label->setStyleSheet("background-color:#bcaca1;"); 
         map_label[x][MAX_Y - 1]->label->show();                            // 显示边界标签
     }
 }
@@ -245,26 +245,31 @@ void GameWidget::startGame(double movespeed)
 }
 
 void GameWidget::restartGame()
-{
+{   
+
+    for (int x = 0; x < MAX_X; x++)
+    {
+        for (int y = 0; y < MAX_Y; y++)
+        {
+            map_label[x][y]->label->setStyleSheet("background:gray"); // 设置标签背景颜色为灰色
+            map_label[x][y]->type = bg_label;                         // 设置类型为背景格子
+            map_label[x][y]->label->hide();                           // 隐藏标签
+            clicked[x][y] = false;                                    // 重置点击状态
+        }
+    }
     canCreat = true; // 允许创建边界
+
+    canMove = true;  // 重启后允许移动
+    pressed = false; // 需要重新按下开始移动
+
     steps = 0;
     scores = 0;
     emit displayStepSignal(0);  // 发送步数重置信号
     emit displayScoreSignal(0); // 发送得分重置信号
     timer.stop();               // 停止计时器
-    for (int x = 0; x < MAX_X; x++)
-    {
-        for (int y = 0; y < MAX_Y; y++)
-        {
-            map_label[x][y]->label->setStyleSheet("background:gray"); // 设置背景颜色为灰色
-            map_label[x][y]->type = bg_label;                         // 设置类型为背景格子
-            map_label[x][y]->label->hide();                           // 隐藏标签
-        }
-    }
 
     // 重新设置clicked数组
     memset(clicked, true, sizeof(clicked));
-
     initSnake();  // 初始化蛇
     initBorder(); // 初始化边界
 }
@@ -275,7 +280,9 @@ void GameWidget::pauseGame()
 }
 
 void GameWidget::continueGame(double movespeed)
-{
+{      
+    canMove = true;       // 禁止移动
+    pressed = true;       // 重置按钮按下状态
     timer.start(movespeed); // 以指定速度继续计时器
 }
 
@@ -348,7 +355,8 @@ void GameWidget::saveGame()
 }
 
 void GameWidget::loadGame()
-{
+{   
+    canCreat = false; // 允许创建边界
     QByteArray array;
     QString path = QFileDialog::getOpenFileName(this, "open", "../", "TXT (*.snakesavedata)"); // 获取打开文件路径
     if (!path.isEmpty())
@@ -382,18 +390,18 @@ void GameWidget::loadGame()
                 if (snakelist[i] != "\n" && snakelist[i] != " ")
                 {
                     map_label[snakelist[i].toInt()][snakelist[i + 1].toInt()]->type = snake_label;                                                         // 设置类型为蛇格子
-                    map_label[snakelist[i].toInt()][snakelist[i + 1].toInt()]->label->setStyleSheet("background:green;border:1px solid rgb(240,240,240)"); // 设置标签样式
+                    map_label[snakelist[i].toInt()][snakelist[i + 1].toInt()]->label->setStyleSheet("background-color:#f2b178;border:1px solid rgb(240,240,240)"); 
                     map_label[snakelist[i].toInt()][snakelist[i + 1].toInt()]->label->show();                                                              // 显示标签
                     snake.push_back(map_label[snakelist[i].toInt()][snakelist[i + 1].toInt()]);                                                            // 将格子添加到蛇身列表
                 }
             }
-            snake[snake.length() - 1]->label->setStyleSheet("background:green;border-radius:" + QString::number(Label_Size / 2)); // 设置蛇尾标签样式
+            snake[snake.length() - 1]->label->setStyleSheet("background:blue;border-radius:" + QString::number(Label_Size / 2)); 
             for (int i = 0; i < borderlist.length() - 1; i += 2)
             {
                 if (borderlist[i] != "\n" && borderlist[i] != " ")
                 {
                     map_label[borderlist[i].toInt()][borderlist[i + 1].toInt()]->type = border_label;                      // 设置类型为边界格子
-                    map_label[borderlist[i].toInt()][borderlist[i + 1].toInt()]->label->setStyleSheet("background:black"); // 设置标签样式
+                    map_label[borderlist[i].toInt()][borderlist[i + 1].toInt()]->label->setStyleSheet("background-color:#bcaca1"); // 设置标签样式
                     map_label[borderlist[i].toInt()][borderlist[i + 1].toInt()]->label->show();                            // 显示标签
                 }
             }

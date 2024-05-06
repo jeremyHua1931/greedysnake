@@ -89,6 +89,7 @@ void MainWindow::on__start_triggered()
     ui->save->setEnabled(false);    // 禁用保存按钮
     ui->load->setEnabled(false);    // 禁用加载按钮
     ui->pause->setEnabled(true);    // 启用暂停按钮
+
 }
 
 void MainWindow::on__pause_triggered()
@@ -112,6 +113,7 @@ void MainWindow::on__continue_triggered()
     ui->game->continueGame(qLn(10.5 - speed) * 50); // 继续游戏并设置速度
 
     ui->con->setEnabled(false);  // 禁用继续按钮
+    ui->start->setEnabled(false); // 禁用开始按钮
     ui->pause->setEnabled(true); // 启用暂停按钮
 }
 
@@ -154,7 +156,7 @@ void MainWindow::on_start_clicked()
     ui->game->startGame(qLn(10.5 - speed) * 50); // 开始游戏并设置速度
 
     ui->start->setEnabled(false);   // 禁用开始按钮
-    ui->restart->setEnabled(false); // 禁用重新开始按钮
+    ui->restart->setEnabled(true); // 禁用重新开始按钮
     ui->con->setEnabled(false);     // 禁用继续按钮
     ui->save->setEnabled(false);    // 禁用保存按钮
     ui->load->setEnabled(false);    // 禁用加载按钮
@@ -165,6 +167,7 @@ void MainWindow::on_load_clicked()
 {
     ui->game->loadGame();      // 加载游戏状态
     ui->con->setEnabled(true); // 启用继续按钮
+    ui->start->setEnabled(false);   // 禁用开始按钮
 }
 
 void MainWindow::on_pause_clicked()
@@ -182,6 +185,7 @@ void MainWindow::on_con_clicked()
     ui->game->continueGame(qLn(10.5 - speed) * 50); // 继续游戏并设置速度
     ui->con->setEnabled(false);                     // 禁用继续按钮
     ui->pause->setEnabled(true);                    // 启用暂停按钮
+    ui->load->setEnabled(false);                    // 禁用加载按钮
 }
 
 void MainWindow::on_restart_clicked()
@@ -193,6 +197,7 @@ void MainWindow::on_restart_clicked()
     ui->save->setEnabled(false);    // 禁用保存按钮
     ui->load->setEnabled(true);     // 启用加载按钮
     ui->start->setEnabled(true);    // 启用开始按钮
+    ui->pause->setEnabled(false);   // 禁用暂停按钮
 }
 
 void MainWindow::on_save_clicked()
