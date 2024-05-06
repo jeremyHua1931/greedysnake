@@ -259,6 +259,10 @@ void GameWidget::restartGame()
             map_label[x][y]->label->hide();                           // 隐藏标签
         }
     }
+
+    // 重新设置clicked数组
+    memset(clicked, true, sizeof(clicked));
+
     initSnake();  // 初始化蛇
     initBorder(); // 初始化边界
 }
