@@ -46,9 +46,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     icon.qrc \
     sound.qrc
-RESOURCES += \
-    icon.qrc \
-    sound.qrc
 
 DISTFILES += \
     MainWindow.qml \

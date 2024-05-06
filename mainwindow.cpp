@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     this->setFixedSize(1025, 900);
-    this->setWindowTitle("Yqr's Greedy Snake");             // 设置窗口标题
-    this->setWindowIcon(QIcon(":/icon/icon/57994126.png")); // 设置窗口图标
+    this->setWindowTitle("Greedy Snake");             // 设置窗口标题
+    this->setWindowIcon(QIcon(":/icon/icon/snake.png")); // 设置窗口图标
 
     // 初始化背景音乐播放列表和播放器
     backgroundMusicPlaylist = new QMediaPlaylist();                             // 创建背景音乐播放列表
