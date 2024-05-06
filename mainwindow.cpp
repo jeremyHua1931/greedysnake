@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // 初始化背景音乐播放列表和播放器
     backgroundMusicPlaylist = new QMediaPlaylist();                             // 创建背景音乐播放列表
-    backgroundMusicPlaylist->addMedia(QUrl("qrc:/snake_background_music.wav")); // 添加背景音乐文件到播放列表
+    backgroundMusicPlaylist->addMedia(QUrl("qrc:sound/snake_background_music.wav")); // 添加背景音乐文件到播放列表
     backgroundMusicPlaylist->setPlaybackMode(QMediaPlaylist::Loop);             // 设置循环播放模式
 
     backgroundMusicPlayer = new QMediaPlayer();                  // 创建背景音乐播放器

@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/">
-        <file>snake_background_music.wav</file>
+    <qresource >
+        <file>sound/snake_background_music.wav</file>
     </qresource>
 </RCC>
