@@ -37,7 +37,7 @@ void GameWidget::initGame()
         {
             QLabel *label = new QLabel(this);                                                     // 创建新的QLabel控件
             label->setGeometry(x * Label_Size + 10, y * Label_Size + 10, Label_Size, Label_Size); // 设置控件的位置和大小
-            label->setStyleSheet("background:gray");                                              // 设置控件的背景颜色为灰色
+            label->setStyleSheet("background:gray;");                                              // 设置控件的背景颜色为灰色
             label->hide();                                                                        // 隐藏控件
             map_label[x][y] = new Snake;                                                          // 创建新的Snake结构体实例并赋值给map_label数组
             map_label[x][y]->x = x;                                                               // 设置Snake结构体的x坐标
@@ -53,19 +53,19 @@ void GameWidget::initBorder()
     for (int y = 0; y < MAX_Y; y++)
     {
         map_label[0][y]->type = border_label;                              // 设置边界标签类型为边界标签
-        map_label[0][y]->label->setStyleSheet("background:black");         // 设置背景颜色为黑色
+        map_label[0][y]->label->setStyleSheet("background-color:#bcaca1;");
         map_label[0][y]->label->show();                                    // 显示边界标签
         map_label[MAX_X - 1][y]->type = border_label;                      // 设置边界标签类型为边界标签
-        map_label[MAX_X - 1][y]->label->setStyleSheet("background:black"); // 设置背景颜色为黑色
+        map_label[MAX_X - 1][y]->label->setStyleSheet("background-color:#bcaca1;"); // 设置背景颜色为黑色
         map_label[MAX_X - 1][y]->label->show();                            // 显示边界标签
     }
     for (int x = 0; x < MAX_X; x++)
     {
         map_label[x][0]->type = border_label;                              // 设置边界标签类型为边界标签
-        map_label[x][0]->label->setStyleSheet("background:black");         // 设置背景颜色为黑色
+        map_label[x][0]->label->setStyleSheet("background-color:#bcaca1;");         // 设置背景颜色为黑色
         map_label[x][0]->label->show();                                    // 显示边界标签
         map_label[x][MAX_Y - 1]->type = border_label;                      // 设置边界标签类型为边界标签
-        map_label[x][MAX_Y - 1]->label->setStyleSheet("background:black"); // 设置背景颜色为黑色
+        map_label[x][MAX_Y - 1]->label->setStyleSheet("background-color:#bcaca1;"); // 设置背景颜色为黑色
         map_label[x][MAX_Y - 1]->label->show();                            // 显示边界标签
     }
 }
@@ -80,11 +80,11 @@ void GameWidget::initSnake()
     for (int i = 0; i < snakelen; i++)
     {
         map_label[initX + i][initY]->type = snake_label;                                                         // 设置蛇身位置的类型为snake_label
-        map_label[initX + i][initY]->label->setStyleSheet("background:green;border:1px solid rgb(240,240,240)"); // 设置蛇身位置的样式
+        map_label[initX + i][initY]->label->setStyleSheet("background-color:#f2b178;border:1px solid rgb(240,240,240)"); // 设置蛇身位置的样式
         map_label[initX + i][initY]->label->show();                                                              // 显示蛇身位置的标签
         snake.append(map_label[initX + i][initY]);                                                               // 将蛇身位置添加到蛇的数组中
     }
-    snake[snake.length() - 1]->label->setStyleSheet("background:green;border-radius:" + QString::number(Label_Size / 2)); // 设置蛇头部分的样式
+    snake[snake.length() - 1]->label->setStyleSheet("background:blue;border-radius:" + QString::number(Label_Size / 2)); // 设置蛇头部分的样式
 }
 
 void GameWidget::moveSnake()
@@ -94,8 +94,8 @@ void GameWidget::moveSnake()
     tail = snake.at(0);                                                                             // 获取蛇尾
     head = snake.at(snake.length() - 1);                                                            // 获取蛇头
     Snake *tmp = map_label[head->x + dX][head->y + dY];                                             // 获取蛇头下一步位置
-    head->label->setStyleSheet("background:green;border:1px solid rgb(240,240,240)");               // 设置蛇头样式
-    tmp->label->setStyleSheet("background:green;border-radius:" + QString::number(Label_Size / 2)); // 设置蛇身样式
+    head->label->setStyleSheet("background-color:#f2b178;border:1px solid rgb(240,240,240)");               // 设置蛇头样式
+    tmp->label->setStyleSheet("background:blue;border-radius:" + QString::number(Label_Size / 2)); // 设置蛇身样式
     tmp->label->show();                                                                             // 显示蛇身
     if (tmp->type == border_label || tmp->type == snake_label)                                      // 如果下一步是边界或者蛇身
     {
@@ -211,7 +211,7 @@ void GameWidget::mousePressEvent(QMouseEvent *e)
                 if (map_label[x][y]->type != snake_label && x != MAX_X - 1 && x != 0 && y != MAX_Y - 1 && y != 0)
                 {
                     map_label[x][y]->type = border_label;                      // 标记为边界格子
-                    map_label[x][y]->label->setStyleSheet("background:black"); // 设置背景样式
+                    map_label[x][y]->label->setStyleSheet("background-color:#bcaca1"); // 设置背景样式
                     map_label[x][y]->label->show();                            // 显示标签
                     clicked[x][y] = false;                                     // 标记为已点击
                 }

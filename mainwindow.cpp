@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QIcon>
 #include <QtMath>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -9,6 +10,25 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->setFixedSize(1025, 900);
     this->setWindowTitle("Greedy Snake");             // 设置窗口标题
     this->setWindowIcon(QIcon(":/icon/icon/snake.png")); // 设置窗口图标
+
+
+
+    // 设置按钮的背景颜色
+    ui->start->setStyleSheet("QPushButton { background-color: #4b5cc4; color: black; font-size: 16px; font-weight: bold;}");
+    ui->pause->setStyleSheet("QPushButton { background-color: #da9f6c; color: white; font-size: 16px; font-weight: bold;}");
+    ui->con->setStyleSheet("QPushButton { background-color: #da9f6c; color: white; font-size: 16px; font-weight: bold;}");
+    ui->restart->setStyleSheet("QPushButton { background-color: #00C3FF; color: black; font-size: 16px; font-weight: bold;}");
+    ui->save->setStyleSheet("QPushButton { background-color: #ebb07a; color: white; font-size: 16px; font-weight: bold;}");
+    ui->load->setStyleSheet("QPushButton { background-color: #ebb07a; color: white; font-size: 16px; font-weight: bold;}");
+    ui->quit->setStyleSheet("QPushButton { background-color: #E54046; color: black; font-size: 16px; font-weight: bold;}");
+
+    ui->help->setStyleSheet("QPushButton { background-color: #C0D8D8; color: black; font-size: 16px; font-weight: bold;}");
+
+    ui->label->setStyleSheet("QLabel {  font-size: 16px; font-weight: bold;}");
+    ui->label_2->setStyleSheet("QLabel {  font-size: 16px; font-weight: bold;}");
+    ui->label_3->setStyleSheet("QLabel {  font-size: 16px; font-weight: bold;}");
+    ui->spLabel->setStyleSheet("QLabel {  color: blue;font-size: 24px; font-weight: bold;}");
+
 
     // 初始化背景音乐播放列表和播放器
     backgroundMusicPlaylist = new QMediaPlaylist();                             // 创建背景音乐播放列表
@@ -29,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     QObject::connect(ui->game, SIGNAL(gameOverSignal()), this, SLOT(gameOverSlots()));               // 连接游戏结束信号和槽函数
     QObject::connect(ui->game, SIGNAL(displayStepSignal(int)), this, SLOT(displayStepSlots(int)));   // 连接显示步数信号和槽函数
     QObject::connect(ui->game, SIGNAL(displayScoreSignal(int)), this, SLOT(displayScoreSlots(int))); // 连接显示得分信号和槽函数
+    QObject::connect(ui->help, &QPushButton::clicked, this, &MainWindow::showHelpDialog);
 }
 
 MainWindow::~MainWindow()
@@ -174,4 +195,13 @@ void MainWindow::displayStepSlots(int step)
 void MainWindow::displayScoreSlots(int score)
 {
     ui->lcd1->display(score); // 显示得分
+}
+
+void MainWindow::showHelpDialog() {
+    QMessageBox::information(this, "Game Rules",
+        "Here are the rules of the game:\n\n"
+        "- Avoid colliding with the walls or the snake's body.\n"
+        "- Use the arrow keys to control the direction of the snake.\n"
+        "- Eat the food to grow longer and increase your score.\n"
+        "- The game speeds up as you eat more food.");
 }

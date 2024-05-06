@@ -133,6 +133,13 @@ private slots:
      */
     void displayScoreSlots(int score);
 
+     /**
+     * @brief 显示游戏规则
+     *
+     */   
+    void showHelpDialog();
+
+
 private:
     Ui::MainWindow *ui;
     QMediaPlayer *backgroundMusicPlayer;     // 背景音乐播放器指针
