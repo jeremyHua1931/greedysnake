@@ -221,6 +221,8 @@ void MainWindow::displayScoreSlots(int score)
 }
 
 void MainWindow::showHelpDialog() {
+
+    on_pause_clicked();
     QMessageBox::information(this, "Game Rules",
         "Here are the rules of the game:\n\n"
         "- Avoid colliding with the walls or the snake's body.\n"
