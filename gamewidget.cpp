@@ -263,7 +263,7 @@ void GameWidget::restartGame()
     }
     canCreat = true; // 允许创建边界
 
-    canMove = true;  // 重启后允许移动
+    canMove = false; 
     pressed = false; // 需要重新按下开始移动
 
     steps = 0;

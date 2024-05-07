@@ -36,7 +36,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
                         "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
 
 
-    ui->help->setStyleSheet("QPushButton { background-color: #C0D8D8; color: black; font-size: 16px; font-weight: bold;}");
+    ui->help->setStyleSheet("QPushButton { background-color: #4b5cc4; color: black; font-size: 14px; font-weight: bold;}"
+                        "QPushButton:disabled { background-color: #C0D8D8; color: grey;}");
 
     ui->label->setStyleSheet("QLabel {  font-size: 16px; font-weight: bold;}");
     ui->label_2->setStyleSheet("QLabel {  font-size: 16px; font-weight: bold;}");
@@ -161,6 +162,7 @@ void MainWindow::on_start_clicked()
     ui->save->setEnabled(false);    // 禁用保存按钮
     ui->load->setEnabled(false);    // 禁用加载按钮
     ui->pause->setEnabled(true);    // 启用暂停按钮
+    ui->help->setEnabled(false);
 }
 
 void MainWindow::on_load_clicked()
@@ -168,6 +170,7 @@ void MainWindow::on_load_clicked()
     ui->game->loadGame();      // 加载游戏状态
     ui->con->setEnabled(true); // 启用继续按钮
     ui->start->setEnabled(false);   // 禁用开始按钮
+     ui->help->setEnabled(true);
 }
 
 void MainWindow::on_pause_clicked()
@@ -177,6 +180,7 @@ void MainWindow::on_pause_clicked()
     ui->pause->setEnabled(false);  // 禁用暂停按钮
     ui->con->setEnabled(true);     // 启用继续按钮
     ui->restart->setEnabled(true); // 启用重新开始按钮
+    ui->help->setEnabled(true);
 }
 
 void MainWindow::on_con_clicked()
@@ -186,6 +190,8 @@ void MainWindow::on_con_clicked()
     ui->con->setEnabled(false);                     // 禁用继续按钮
     ui->pause->setEnabled(true);                    // 启用暂停按钮
     ui->load->setEnabled(false);                    // 禁用加载按钮
+    ui->save->setEnabled(false);
+    ui->help->setEnabled(false);
 }
 
 void MainWindow::on_restart_clicked()
@@ -198,11 +204,13 @@ void MainWindow::on_restart_clicked()
     ui->load->setEnabled(true);     // 启用加载按钮
     ui->start->setEnabled(true);    // 启用开始按钮
     ui->pause->setEnabled(false);   // 禁用暂停按钮
+    ui->help->setEnabled(true);
 }
 
 void MainWindow::on_save_clicked()
 {
     ui->game->saveGame(); // 保存游戏状态
+     ui->help->setEnabled(true);
 }
 
 void MainWindow::on_quit_clicked()
@@ -222,7 +230,6 @@ void MainWindow::displayScoreSlots(int score)
 
 void MainWindow::showHelpDialog() {
 
-    on_pause_clicked();
     QMessageBox::information(this, "Game Rules",
         "Here are the rules of the game:\n\n"
         "- Avoid colliding with the walls or the snake's body.\n"
